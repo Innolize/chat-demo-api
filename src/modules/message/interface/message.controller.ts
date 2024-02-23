@@ -15,7 +15,7 @@ export class MessageController {
     return this.messageService.findAll();
   }
 
-  @Get()
+  @Get(':id')
   findOne(id: number) {
     return this.messageService.findOne(id);
   }
