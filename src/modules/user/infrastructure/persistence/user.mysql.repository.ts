@@ -2,9 +2,9 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
-import { CreateUserDto } from '../application/dto/create-user.dto';
-import { IUserRepository } from '../application/repository/user.repository';
-import { User } from '../domain/user.domain';
+import { CreateUserDto } from '../../application/dto/create-user.dto';
+import { IUserRepository } from '../../application/repository/user.repository';
+import { User } from '../../domain/user.domain';
 
 @Injectable()
 export class UserMySqlRepository implements IUserRepository {
