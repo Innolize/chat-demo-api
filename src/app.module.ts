@@ -12,6 +12,7 @@ import { CommonModule } from '@common/common.module';
 import { AuthorModule } from '@/modules/author/author.module';
 import { BookModule } from '@/modules/book/book.module';
 
+import { MessageModule } from './modules/message/message.module';
 import { UserModule } from './modules/user/user.module';
 
 @Module({
@@ -30,10 +31,11 @@ import { UserModule } from './modules/user/user.module';
         return new DataSource(options).initialize();
       },
     }),
-    UserModule,
     CommonModule,
     AuthorModule,
     BookModule,
+    UserModule,
+    MessageModule,
   ],
   controllers: [],
   providers: [],

@@ -1,6 +1,6 @@
 import { EntitySchema } from 'typeorm';
 
-import { User } from '../domain/user.domain';
+import { User } from '../../domain/user.domain';
 
 export const UserSchema = new EntitySchema<User>({
   name: 'User',
