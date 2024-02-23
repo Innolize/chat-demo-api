@@ -12,6 +12,7 @@ import { CommonModule } from '@common/common.module';
 import { AuthorModule } from '@/modules/author/author.module';
 import { BookModule } from '@/modules/book/book.module';
 
+import { ChatModule } from './modules/chat/chat.module';
 import { MessageModule } from './modules/message/message.module';
 import { UserModule } from './modules/user/user.module';
 
@@ -36,6 +37,7 @@ import { UserModule } from './modules/user/user.module';
     BookModule,
     UserModule,
     MessageModule,
+    ChatModule,
   ],
   controllers: [],
   providers: [],

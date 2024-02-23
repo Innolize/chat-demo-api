@@ -29,5 +29,12 @@ export const MessageSchema = new EntitySchema<Message>({
         name: 'user_id',
       },
     },
+    chat: {
+      type: 'many-to-one',
+      target: 'Chat',
+      joinColumn: {
+        name: 'chat_id',
+      },
+    },
   },
 });
