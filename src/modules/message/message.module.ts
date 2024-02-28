@@ -7,12 +7,14 @@ import { MessageService } from './application/service/message.service';
 import { MessageMySqlRepository } from './infrastructure/persistence/message.mysql.repository';
 import { MessageSchema } from './infrastructure/persistence/message.schema';
 import { MessageController } from './interface/message.controller';
+import { MessageGateway } from './interface/message.gateway';
 
 @Module({
   imports: [TypeOrmModule.forFeature([MessageSchema]), UserModule],
   controllers: [MessageController],
   providers: [
     MessageService,
+    MessageGateway,
     {
       provide: MESSAGE_REPOSITORY,
       useClass: MessageMySqlRepository,
