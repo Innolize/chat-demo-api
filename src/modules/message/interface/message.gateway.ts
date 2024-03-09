@@ -11,6 +11,9 @@ import {
 } from '@nestjs/websockets';
 import { Socket } from 'socket.io';
 
+import { CreateMessageDto } from '../application/dto/create-message.dto';
+import { MessageService } from '../application/service/message.service';
+
 @WebSocketGateway({
   transports: ['polling'],
   cors: { origin: '*' },
@@ -18,6 +21,7 @@ import { Socket } from 'socket.io';
 export class MessageGateway
   implements OnGatewayInit, OnGatewayConnection, OnGatewayDisconnect
 {
+  constructor(private readonly messageService: MessageService) {}
   handleDisconnect(@ConnectedSocket() client: Socket) {
     console.log('disconnected');
     return;
@@ -46,21 +50,20 @@ export class MessageGateway
   }
 
   @SubscribeMessage('send message')
-  handleMessage(
+  async handleMessage(
     @ConnectedSocket() client: Socket,
     @MessageBody() body: CreateMessageDto,
   ) {
-    const message = {
+    const message = await this.messageService.save({
+      user_id: body.user_id,
+      chat_id: body.chat_id,
       message: body.message,
-      id: client.id,
-      name: 'Jane Doe',
-      avatar: 'https://picsum.photos/200',
-    };
-    this.server.to(body.chat_id).emit('new chat message', message);
-  }
-}
+    });
 
-interface CreateMessageDto {
-  message: string;
-  chat_id: string;
+    const messageResponse = await this.messageService.findOne(message.id);
+
+    const CHAT_ID = body.chat_id.toString();
+
+    this.server.to(CHAT_ID).emit('new chat message', messageResponse);
+  }
 }

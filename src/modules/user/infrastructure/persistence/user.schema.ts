@@ -16,5 +16,9 @@ export const UserSchema = new EntitySchema<User>({
       name: 'name',
       type: 'varchar',
     },
+    avatar: {
+      name: 'avatar',
+      type: 'varchar',
+    },
   },
 });

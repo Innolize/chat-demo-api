@@ -11,7 +11,11 @@ export class MessageMySqlRepository implements IMessageRepository {
     private readonly messageRepository: Repository<Message>,
   ) {}
   async findAll(): Promise<Message[]> {
-    return this.messageRepository.find();
+    return this.messageRepository.find({
+      relations: {
+        user: true,
+      },
+    });
   }
   async findOne(id: number): Promise<Message> {
     return this.messageRepository.findOneBy({ id });
